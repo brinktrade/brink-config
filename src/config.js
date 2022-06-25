@@ -18,7 +18,8 @@ const {
   LIMIT_SWAP_VERIFIER,
   NFT_LIMIT_SWAP_VERIFIER,
   CANCEL_VERIFIER,
-  TRANSFER_VERIFIER
+  TRANSFER_VERIFIER,
+  NFT_TRANSFER_VERIFIER
 } = verifierConstants
 
 const tokenTypes = {
@@ -36,6 +37,7 @@ const VERIFIERS = [
   createVerifierDef('NftLimitSwapVerifier', NFT_LIMIT_SWAP_VERIFIER, 'nftToNft', 6),
   createVerifierDef('TransferVerifier', TRANSFER_VERIFIER, 'tokenTransfer', 6),
   createVerifierDef('TransferVerifier', TRANSFER_VERIFIER, 'ethTransfer', 5),
+  createVerifierDef('NftTransferVerifier', NFT_TRANSFER_VERIFIER, 'nftTransfer', 7),
   createVerifierDef('CancelVerifier', CANCEL_VERIFIER, 'cancel', 2)
 ]
 
