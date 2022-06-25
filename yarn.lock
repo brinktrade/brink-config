@@ -41,10 +41,10 @@
     axios "^0.25.0"
     chai "^4.3.4"
 
-"@brinkninja/verifiers@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@brinkninja/verifiers/-/verifiers-1.1.1.tgz#997add38ed7f5a36860c26ea793ba015b6ac24a0"
-  integrity sha512-IV2OBd/3KmTvpnyQPANCQp53qTGYvWabciFmeT+cIT4MiyDrZ3FodJffitniXISJl2tq+NnpnaZL+5iNQm+EJA==
+"@brinkninja/verifiers@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@brinkninja/verifiers/-/verifiers-1.2.0.tgz#6befa4e57d8a7deea6d1bbe7fda5dce505aea470"
+  integrity sha512-yRhaE9aSNC8HZN1miS20jp9MbJHwcV9H54azhpg6GqzpFtn48Ys37k31dfOlUcoEuhUNTUpL6Qi5vVHKtf6SQw==
 
 "@nomiclabs/hardhat-ethers@^2.0.4":
   version "2.0.5"

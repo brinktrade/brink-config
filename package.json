@@ -3,7 +3,7 @@
   "version": "1.7.0",
   "dependencies": {
     "@brinkninja/core": "^1.0.0",
-    "@brinkninja/verifiers": "^1.1.1",
+    "@brinkninja/verifiers": "^1.2.0",
     "@brinkninja/adapters": "^1.0.0",
     "@brinkninja/1inch-adapter": "^1.0.0",
     "@brinkninja/nft-adapter": "^1.0.0",
