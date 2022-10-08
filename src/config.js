@@ -20,7 +20,8 @@ const {
   NFT_APPROVAL_SWAP_VERIFIER,
   CANCEL_VERIFIER,
   TRANSFER_VERIFIER,
-  NFT_TRANSFER_VERIFIER
+  NFT_TRANSFER_VERIFIER,
+  LIMIT_APPROVAL_SWAP_VERIFIER
 } = verifierConstants
 
 const tokenTypes = {
@@ -41,7 +42,9 @@ const VERIFIERS = [
   createVerifierDef('TransferVerifier', TRANSFER_VERIFIER, 'tokenTransfer', 6),
   createVerifierDef('TransferVerifier', TRANSFER_VERIFIER, 'ethTransfer', 5),
   createVerifierDef('NftTransferVerifier', NFT_TRANSFER_VERIFIER, 'nftTransfer', 7),
-  createVerifierDef('CancelVerifier', CANCEL_VERIFIER, 'cancel', 2)
+  createVerifierDef('CancelVerifier', CANCEL_VERIFIER, 'cancel', 2),
+  createVerifierDef('LimitApprovalSwapVerifier', LIMIT_APPROVAL_SWAP_VERIFIER, 'tokenToToken', 7),
+  createVerifierDef('LimitApprovalSwapVerifier', LIMIT_APPROVAL_SWAP_VERIFIER, 'tokenToEth', 6)
 ]
 
 let config = {
