@@ -26,7 +26,8 @@ const deterministicAddresses = {
 const {
   CANCEL_VERIFIER,
   TRANSFER_VERIFIER,
-  NFT_TRANSFER_VERIFIER
+  NFT_TRANSFER_VERIFIER,
+  LIMIT_APPROVAL_SWAP_VERIFIER
 } = verifierConstants
 
 const {
