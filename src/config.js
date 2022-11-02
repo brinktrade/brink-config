@@ -1,6 +1,14 @@
 const _ = require('lodash')
 const ethers = require('ethers')
 const verifierConstants = require('@brinkninja/verifiers/constants')
+const verifierV2Constants = require('@brinkninja/verifiers-v2/constants')
+
+const deprecatedVerifiers = [
+  'LIMIT_SWAP_VERIFIER',
+  'NFT_LIMIT_SWAP_VERIFIER',
+  'LIMIT_APPROVAL_SWAP_VERIFIER',
+  'NFT_APPROVAL_SWAP_VERIFIER'
+]
 
 const deterministicAddresses = {
   ...require('@brinkninja/core/constants'),
@@ -8,20 +16,22 @@ const deterministicAddresses = {
   ...require('@brinkninja/1inch-adapter/constants'),
   ...require('@brinkninja/nft-adapter/constants'),
   ...require('@brinkninja/univ3-adapter/constants'),
-  ...verifierConstants,
+  ...filterDeprecatedVerifiers(verifierConstants),
+  ...verifierV2Constants,
   UNISWAP_V2_FACTORY: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f',
   UNISWAP_V2_ROUTER_02: '0x7a250d5630b4cf539739df2c5dacb4c659f2488d',
   UNISWAP_V3_FACTORY: '0x1f98431c8ad98523631ae4a59f267346ea31f984'
 }
 
 const {
-  LIMIT_SWAP_VERIFIER,
-  NFT_LIMIT_SWAP_VERIFIER,
-  NFT_APPROVAL_SWAP_VERIFIER,
   CANCEL_VERIFIER,
   TRANSFER_VERIFIER,
   NFT_TRANSFER_VERIFIER
 } = verifierConstants
+
+const {
+  APPROVAL_SWAPS_V1
+} = verifierV2Constants
 
 const tokenTypes = {
   ERC20: 'ERC20',
@@ -30,18 +40,16 @@ const tokenTypes = {
 }
 
 const VERIFIERS = [
-  createVerifierDef('LimitSwapVerifier', LIMIT_SWAP_VERIFIER, 'ethToToken', 6),
-  createVerifierDef('LimitSwapVerifier', LIMIT_SWAP_VERIFIER, 'tokenToEth', 6),
-  createVerifierDef('LimitSwapVerifier', LIMIT_SWAP_VERIFIER, 'tokenToToken', 7),
-  createVerifierDef('NftLimitSwapVerifier', NFT_LIMIT_SWAP_VERIFIER, 'tokenToNft', 6),
-  createVerifierDef('NftLimitSwapVerifier', NFT_LIMIT_SWAP_VERIFIER, 'nftToToken', 7),
-  createVerifierDef('NftLimitSwapVerifier', NFT_LIMIT_SWAP_VERIFIER, 'nftToNft', 6),
-  createVerifierDef('NftApprovalSwapVerifier', NFT_APPROVAL_SWAP_VERIFIER, 'tokenToNft', 6),
-  createVerifierDef('NftApprovalSwapVerifier', NFT_APPROVAL_SWAP_VERIFIER, 'nftToToken', 7),
-  createVerifierDef('TransferVerifier', TRANSFER_VERIFIER, 'tokenTransfer', 6),
-  createVerifierDef('TransferVerifier', TRANSFER_VERIFIER, 'ethTransfer', 5),
-  createVerifierDef('NftTransferVerifier', NFT_TRANSFER_VERIFIER, 'nftTransfer', 7),
-  createVerifierDef('CancelVerifier', CANCEL_VERIFIER, 'cancel', 2)
+  createVerifierDef('verifiers', 'TransferVerifier', TRANSFER_VERIFIER, 'tokenTransfer', 6),
+  createVerifierDef('verifiers', 'TransferVerifier', TRANSFER_VERIFIER, 'ethTransfer', 5),
+  createVerifierDef('verifiers', 'NftTransferVerifier', NFT_TRANSFER_VERIFIER, 'nftTransfer', 7),
+  createVerifierDef('verifiers', 'CancelVerifier', CANCEL_VERIFIER, 'cancel', 2),
+  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToToken', 7),
+  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToNft', 6),
+  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'nftToToken', 7),
+  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToERC1155', 7),
+  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'ERC1155ToToken', 8),
+  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'ERC1155ToERC1155', 9)
 ]
 
 let config = {
@@ -95,8 +103,8 @@ let config = {
   }
 }
 
-function createVerifierDef (contractName, contractAddress, functionName, numSignedParams) {
-  const artifact = require(`@brinkninja/verifiers/artifacts/contracts/Verifiers/${contractName}.sol/${contractName}.json`)
+function createVerifierDef (pkgName, contractName, contractAddress, functionName, numSignedParams) {
+  const artifact = require(`@brinkninja/${pkgName}/artifacts/contracts/Verifiers/${contractName}.sol/${contractName}.json`)
   const fnDef = _.find(artifact.abi, { name: functionName })
 
   const interface = new ethers.utils.Interface(artifact.abi)
@@ -128,6 +136,16 @@ function createVerifierDef (contractName, contractAddress, functionName, numSign
     contractAddress,
     paramTypes
   }
+}
+
+function filterDeprecatedVerifiers (verifierConstantsMapping) {
+  let filteredMapping = {}
+  for (let verifierConst in verifierConstantsMapping) {
+    if (!deprecatedVerifiers.includes(verifierConst)) {
+      filteredMapping[verifierConst] = verifierConstantsMapping[verifierConst]
+    }
+  }
+  return filteredMapping
 }
 
 module.exports = config
