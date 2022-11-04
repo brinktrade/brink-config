@@ -48,7 +48,7 @@ const VERIFIERS = [
   createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToToken', 7),
   createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToNft', 6),
   createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'nftToToken', 7),
-  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToERC1155', 7),
+  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToERC1155', 8),
   createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'ERC1155ToToken', 8),
   createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'ERC1155ToERC1155', 9)
 ]
