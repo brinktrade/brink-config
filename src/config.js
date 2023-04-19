@@ -2,6 +2,7 @@ const _ = require('lodash')
 const ethers = require('ethers')
 const verifierConstants = require('@brinkninja/verifiers/constants')
 const verifierV2Constants = require('@brinkninja/verifiers-v2/constants')
+const startegiesConstants = require('@brinkninja/strategies/constants')
 
 const deprecatedVerifiers = [
   'LIMIT_SWAP_VERIFIER',
@@ -18,6 +19,7 @@ const deterministicAddresses = {
   ...require('@brinkninja/univ3-adapter/constants'),
   ...filterDeprecatedVerifiers(verifierConstants),
   ...verifierV2Constants,
+  ...startegiesConstants,
   UNISWAP_V2_FACTORY: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f',
   UNISWAP_V2_ROUTER_02: '0x7a250d5630b4cf539739df2c5dacb4c659f2488d',
   UNISWAP_V3_FACTORY: '0x1f98431c8ad98523631ae4a59f267346ea31f984'

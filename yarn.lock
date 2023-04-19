@@ -32,6 +32,11 @@
     "@uniswap/v3-core" "^1.0.0-rc.1"
     "@uniswap/v3-periphery" "^1.0.0-beta.19"
 
+"@brinkninja/strategies@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@brinkninja/strategies/-/strategies-0.2.0.tgz#c186e697bd7e184025a63155d1bcc39c70c5f69c"
+  integrity sha512-KKKf2wE28dciVgmckFVHKcOThRAGSFNGAz6S2usAbaVmlxeS+OUkm/X24Db6Yq0LiylxAGYNsDRSbPOq2kxIUA==
+
 "@brinkninja/univ3-adapter@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@brinkninja/univ3-adapter/-/univ3-adapter-1.3.0.tgz#873b5f384e874d712580473d7f671425c0afdbc1"
