@@ -17,6 +17,7 @@ const deterministicAddresses = {
   ...require('@brinkninja/1inch-adapter/constants'),
   ...require('@brinkninja/nft-adapter/constants'),
   ...require('@brinkninja/univ3-adapter/constants'),
+  ...require('@brinkninja/strategy-adapters/constants'),
   ...filterDeprecatedVerifiers(verifierConstants),
   ...verifierV2Constants,
   ...startegiesConstants,
