@@ -1,4 +1,8 @@
 node_modules
 secrets**
 .env**
-dist
+src
+.prettierrc
+tsconfig.json
+.gitignore
+readme.md
