@@ -1,6 +1,6 @@
 {
   "name": "@brinkninja/config",
-  "version": "2.8.0",
+  "version": "2.9.0-alpha.1",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc --outDir dist"
