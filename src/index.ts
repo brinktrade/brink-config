@@ -1,8 +1,17 @@
-const _ = require('lodash')
-const ethers = require('ethers')
-const verifierConstants = require('@brinkninja/verifiers/constants')
-const verifierV2Constants = require('@brinkninja/verifiers-v2/constants')
-const startegiesConstants = require('@brinkninja/strategies/constants')
+import find from 'lodash/find'
+import ethers from 'ethers'
+import verifierConstants from '@brinkninja/verifiers/constants'
+import verifierV2Constants from '@brinkninja/verifiers-v2/constants'
+import startegiesConstants from '@brinkninja/strategies/constants'
+import { AbiFunction } from 'abitype'
+import { FunctionFragment } from 'ethers/lib/utils'
+
+import coreConstants from '@brinkninja/core/constants'
+import adaptersConstants from '@brinkninja/adapters/constants'
+import oneInchAdapterConstants from '@brinkninja/1inch-adapter/constants'
+import nftAdapterConstants from '@brinkninja/nft-adapter/constants'
+import univ3AdapterConstants from '@brinkninja/univ3-adapter/constants'
+import strategiesAdapterConstants from '@brinkninja/strategy-adapters/constants'
 
 const deprecatedVerifiers = [
   'LIMIT_SWAP_VERIFIER',
@@ -12,12 +21,12 @@ const deprecatedVerifiers = [
 ]
 
 const deterministicAddresses = {
-  ...require('@brinkninja/core/constants'),
-  ...require('@brinkninja/adapters/constants'),
-  ...require('@brinkninja/1inch-adapter/constants'),
-  ...require('@brinkninja/nft-adapter/constants'),
-  ...require('@brinkninja/univ3-adapter/constants'),
-  ...require('@brinkninja/strategy-adapters/constants'),
+  ...coreConstants,
+  ...adaptersConstants,
+  ...oneInchAdapterConstants,
+  ...nftAdapterConstants,
+  ...univ3AdapterConstants,
+  ...strategiesAdapterConstants,
   ...filterDeprecatedVerifiers(verifierConstants),
   ...verifierV2Constants,
   ...startegiesConstants,
@@ -33,9 +42,7 @@ const {
   LIMIT_APPROVAL_SWAP_VERIFIER
 } = verifierConstants
 
-const {
-  APPROVAL_SWAPS_V1
-} = verifierV2Constants
+const { APPROVAL_SWAPS_V1 } = verifierV2Constants
 
 const tokenTypes = {
   ERC20: 'ERC20',
@@ -44,16 +51,76 @@ const tokenTypes = {
 }
 
 const VERIFIERS = [
-  createVerifierDef('verifiers', 'TransferVerifier', TRANSFER_VERIFIER, 'tokenTransfer', 6),
-  createVerifierDef('verifiers', 'TransferVerifier', TRANSFER_VERIFIER, 'ethTransfer', 5),
-  createVerifierDef('verifiers', 'NftTransferVerifier', NFT_TRANSFER_VERIFIER, 'nftTransfer', 7),
-  createVerifierDef('verifiers', 'CancelVerifier', CANCEL_VERIFIER, 'cancel', 2),
-  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToToken', 7),
-  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToNft', 6),
-  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'nftToToken', 7),
-  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'tokenToERC1155', 8),
-  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'ERC1155ToToken', 8),
-  createVerifierDef('verifiers-v2', 'ApprovalSwapsV1', APPROVAL_SWAPS_V1, 'ERC1155ToERC1155', 9)
+  createVerifierDef(
+    'verifiers',
+    'TransferVerifier',
+    TRANSFER_VERIFIER,
+    'tokenTransfer',
+    6
+  ),
+  createVerifierDef(
+    'verifiers',
+    'TransferVerifier',
+    TRANSFER_VERIFIER,
+    'ethTransfer',
+    5
+  ),
+  createVerifierDef(
+    'verifiers',
+    'NftTransferVerifier',
+    NFT_TRANSFER_VERIFIER,
+    'nftTransfer',
+    7
+  ),
+  createVerifierDef(
+    'verifiers',
+    'CancelVerifier',
+    CANCEL_VERIFIER,
+    'cancel',
+    2
+  ),
+  createVerifierDef(
+    'verifiers-v2',
+    'ApprovalSwapsV1',
+    APPROVAL_SWAPS_V1,
+    'tokenToToken',
+    7
+  ),
+  createVerifierDef(
+    'verifiers-v2',
+    'ApprovalSwapsV1',
+    APPROVAL_SWAPS_V1,
+    'tokenToNft',
+    6
+  ),
+  createVerifierDef(
+    'verifiers-v2',
+    'ApprovalSwapsV1',
+    APPROVAL_SWAPS_V1,
+    'nftToToken',
+    7
+  ),
+  createVerifierDef(
+    'verifiers-v2',
+    'ApprovalSwapsV1',
+    APPROVAL_SWAPS_V1,
+    'tokenToERC1155',
+    8
+  ),
+  createVerifierDef(
+    'verifiers-v2',
+    'ApprovalSwapsV1',
+    APPROVAL_SWAPS_V1,
+    'ERC1155ToToken',
+    8
+  ),
+  createVerifierDef(
+    'verifiers-v2',
+    'ApprovalSwapsV1',
+    APPROVAL_SWAPS_V1,
+    'ERC1155ToERC1155',
+    9
+  )
 ]
 
 let config = {
@@ -107,12 +174,20 @@ let config = {
   }
 }
 
-function createVerifierDef (pkgName, contractName, contractAddress, functionName, numSignedParams) {
+function createVerifierDef(
+  pkgName: string,
+  contractName: string,
+  contractAddress: string,
+  functionName: string,
+  numSignedParams: number
+) {
   const artifact = require(`@brinkninja/${pkgName}/artifacts/contracts/Verifiers/${contractName}.sol/${contractName}.json`)
-  const fnDef = _.find(artifact.abi, { name: functionName })
+  const fnDef: AbiFunction = find(artifact.abi, { name: functionName })
 
   const abiInterface = new ethers.utils.Interface(artifact.abi)
-  const functionSignature = ethers.utils.FunctionFragment.from(fnDef).format()
+  const functionSignature = ethers.utils.FunctionFragment.from(
+    fnDef as unknown as FunctionFragment
+  ).format()
   const functionSignatureHash = abiInterface.getSighash(functionSignature)
 
   const paramTypes = fnDef.inputs.map((input, i) => {
@@ -142,8 +217,10 @@ function createVerifierDef (pkgName, contractName, contractAddress, functionName
   }
 }
 
-function filterDeprecatedVerifiers (verifierConstantsMapping) {
-  let filteredMapping = {}
+function filterDeprecatedVerifiers(verifierConstantsMapping: {
+  [key: string]: string
+}) {
+  let filteredMapping: { [key: string]: string } = {}
   for (let verifierConst in verifierConstantsMapping) {
     if (!deprecatedVerifiers.includes(verifierConst)) {
       filteredMapping[verifierConst] = verifierConstantsMapping[verifierConst]
@@ -152,4 +229,4 @@ function filterDeprecatedVerifiers (verifierConstantsMapping) {
   return filteredMapping
 }
 
-module.exports = config
+export default config
