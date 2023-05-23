@@ -111,9 +111,9 @@ function createVerifierDef (pkgName, contractName, contractAddress, functionName
   const artifact = require(`@brinkninja/${pkgName}/artifacts/contracts/Verifiers/${contractName}.sol/${contractName}.json`)
   const fnDef = _.find(artifact.abi, { name: functionName })
 
-  const interface = new ethers.utils.Interface(artifact.abi)
+  const abiInterface = new ethers.utils.Interface(artifact.abi)
   const functionSignature = ethers.utils.FunctionFragment.from(fnDef).format()
-  const functionSignatureHash = interface.getSighash(functionSignature)
+  const functionSignatureHash = abiInterface.getSighash(functionSignature)
 
   const paramTypes = fnDef.inputs.map((input, i) => {
     let paramDef = {
