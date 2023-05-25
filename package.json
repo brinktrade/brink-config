@@ -1,10 +1,7 @@
 {
   "name": "@brinkninja/config",
-  "version": "2.9.0-alpha.1",
+  "version": "2.9.0-alpha.2",
   "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc --outDir dist"
-  },
   "dependencies": {
     "@brinkninja/1inch-adapter": "^1.0.0",
     "@brinkninja/adapters": "^1.0.0",
@@ -20,11 +17,5 @@
   },
   "description": "Configuration data for Brink deployments",
   "author": "brink.trade",
-  "license": "GPL-3.0-or-later",
-  "devDependencies": {
-    "@types/lodash": "^4.14.194",
-    "@types/node": "^20.2.3",
-    "typescript": "^5.0.4",
-    "abitype": "^0.8.4"
-  }
+  "license": "GPL-3.0-or-later"
 }

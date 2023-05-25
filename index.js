@@ -1,17 +1,15 @@
-import find from 'lodash/find'
-import ethers from 'ethers'
-import verifierConstants from '@brinkninja/verifiers/constants'
-import verifierV2Constants from '@brinkninja/verifiers-v2/constants'
-import startegiesConstants from '@brinkninja/strategies/constants'
-import { AbiFunction } from 'abitype'
-import { FunctionFragment } from 'ethers/lib/utils'
+const find = require('lodash/find')
+const ethers = require('ethers')
+const verifierConstants = require('@brinkninja/verifiers/constants')
+const verifierV2Constants = require('@brinkninja/verifiers-v2/constants')
+const startegiesConstants = require('@brinkninja/strategies/constants')
 
-import coreConstants from '@brinkninja/core/constants'
-import adaptersConstants from '@brinkninja/adapters/constants'
-import oneInchAdapterConstants from '@brinkninja/1inch-adapter/constants'
-import nftAdapterConstants from '@brinkninja/nft-adapter/constants'
-import univ3AdapterConstants from '@brinkninja/univ3-adapter/constants'
-import strategiesAdapterConstants from '@brinkninja/strategy-adapters/constants'
+const coreConstants = require('@brinkninja/core/constants')
+const adaptersConstants = require('@brinkninja/adapters/constants')
+const oneInchAdapterConstants = require('@brinkninja/1inch-adapter/constants')
+const nftAdapterConstants = require('@brinkninja/nft-adapter/constants')
+const univ3AdapterConstants = require('@brinkninja/univ3-adapter/constants')
+const strategiesAdapterConstants = require('@brinkninja/strategy-adapters/constants')
 
 const deprecatedVerifiers = [
   'LIMIT_SWAP_VERIFIER',
@@ -175,19 +173,17 @@ let config = {
 }
 
 function createVerifierDef(
-  pkgName: string,
-  contractName: string,
-  contractAddress: string,
-  functionName: string,
-  numSignedParams: number
+  pkgName,
+  contractName,
+  contractAddress,
+  functionName,
+  numSignedParams
 ) {
   const artifact = require(`@brinkninja/${pkgName}/artifacts/contracts/Verifiers/${contractName}.sol/${contractName}.json`)
-  const fnDef: AbiFunction = find(artifact.abi, { name: functionName })
+  const fnDef = find(artifact.abi, { name: functionName })
 
   const abiInterface = new ethers.utils.Interface(artifact.abi)
-  const functionSignature = ethers.utils.FunctionFragment.from(
-    fnDef as unknown as FunctionFragment
-  ).format()
+  const functionSignature = ethers.utils.FunctionFragment.from(fnDef).format()
   const functionSignatureHash = abiInterface.getSighash(functionSignature)
 
   const paramTypes = fnDef.inputs.map((input, i) => {
@@ -217,10 +213,8 @@ function createVerifierDef(
   }
 }
 
-function filterDeprecatedVerifiers(verifierConstantsMapping: {
-  [key: string]: string
-}) {
-  let filteredMapping: { [key: string]: string } = {}
+function filterDeprecatedVerifiers(verifierConstantsMapping) {
+  let filteredMapping = {}
   for (let verifierConst in verifierConstantsMapping) {
     if (!deprecatedVerifiers.includes(verifierConst)) {
       filteredMapping[verifierConst] = verifierConstantsMapping[verifierConst]
@@ -229,4 +223,4 @@ function filterDeprecatedVerifiers(verifierConstantsMapping: {
   return filteredMapping
 }
 
-export default config
+module.exports = config
