@@ -32,10 +32,10 @@
     "@uniswap/v3-core" "^1.0.0-rc.1"
     "@uniswap/v3-periphery" "^1.0.0-beta.19"
 
-"@brinkninja/strategies@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@brinkninja/strategies/-/strategies-0.2.4.tgz#dad2dfead408b246139a890f01b0289c92bcb8d5"
-  integrity sha512-4QVo2WnAFmmW7zYNmvkQs9PWGC/pcJ6cg2P7+7zPBbXd3mYbjBLsdau5DX9ZJu7OY6NlCRkZPiS00viLtrxg9w==
+"@brinkninja/strategies@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@brinkninja/strategies/-/strategies-0.3.0.tgz#f4468593371ae69118ca85d4ed48cff13df7a6d0"
+  integrity sha512-BgLIsGCZWbhmDgJQB1nfvnONWqjFghgNZXeRK9x44Rq6EtXhTeWSuLRBKSri2Rvr7SJ1zSABTmKw0YEF4lihIg==
 
 "@brinkninja/strategy-adapters@^0.1.0":
   version "0.1.0"
