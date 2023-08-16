@@ -1,6 +1,6 @@
 {
   "name": "@brinkninja/config",
-  "version": "2.9.2",
+  "version": "2.10.0",
   "main": "index.js",
   "dependencies": {
     "@brinkninja/1inch-adapter": "^1.0.0",
