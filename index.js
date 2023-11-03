@@ -130,6 +130,14 @@ let config = {
     ETHERSCAN_DOMAIN: 'etherscan.io',
     WETH9: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
   },
+  matic: {
+    ...deterministicAddresses,
+    VERIFIERS,
+    CHAIN_ID: 137,
+    NETWORK: 'matic',
+    ETHERSCAN_DOMAIN: 'polygonscan.com',
+    WETH9: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619'
+  },
   localhost: {
     ...deterministicAddresses,
     VERIFIERS,
