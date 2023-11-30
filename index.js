@@ -138,6 +138,22 @@ let config = {
     ETHERSCAN_DOMAIN: 'polygonscan.com',
     WETH9: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619'
   },
+  arbitrum: {
+    ...deterministicAddresses,
+    VERIFIERS,
+    CHAIN_ID: 42161,
+    NETWORK: 'arbitrum',
+    ETHERSCAN_DOMAIN: 'arbiscan.io',
+    WETH9: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'
+  },
+  optimism: {
+    ...deterministicAddresses,
+    VERIFIERS,
+    CHAIN_ID: 10,
+    NETWORK: 'optimism',
+    ETHERSCAN_DOMAIN: 'optimistic.etherscan.io',
+    WETH9: '0x4200000000000000000000000000000000000006'
+  },
   localhost: {
     ...deterministicAddresses,
     VERIFIERS,
