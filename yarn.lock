@@ -42,14 +42,10 @@
   resolved "https://registry.yarnpkg.com/@brinkninja/strategies/-/strategies-0.3.4.tgz#201c42b1ec10d2600fc0dc6c602d050ae2e79db4"
   integrity sha512-ypUQgv6nhvw7+cuIedlo/WwvwPDM6xSdsz8IWMvivjzaJu7NGnsKoMmG7b9v9nb6zYuNeIHVBlChdiuMRsd75w==
 
-"@brinkninja/strategy-adapters@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/@brinkninja/strategy-adapters/-/strategy-adapters-0.1.0.tgz#145a64d07b00f9a6ba88dffca569641fce45bbff"
-  integrity sha512-7Jjut+tDkawDRdjZ3FMcGAgQOBiqLqPKSJQDLYKykROoMdRf/jT3xD3SbivgcwkFMkxuB14G0FgRUetZCRXsWA==
-  dependencies:
-    "@nomiclabs/hardhat-ethers" "^2.0.4"
-    axios "^0.25.0"
-    chai "^4.3.4"
+"@brinkninja/strategy-adapters@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@brinkninja/strategy-adapters/-/strategy-adapters-0.1.1.tgz#c13de154f640fdbb8936525f7ac45c4b46afe0ed"
+  integrity sha512-ma2gfwsiOxJwYjYJ8plRTfIgFieIuxSREeRKKsGB5HmTymY33PQIWINIt+jmZp7SMLzic7FFzIZSfTd+di17zg==
 
 "@brinkninja/univ3-adapter@^1.3.0":
   version "1.3.0"
